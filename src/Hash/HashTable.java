@@ -18,6 +18,9 @@ public class HashTable {
         size = 0;
     }
 
+
+    //Part 1
+
 //    public Object put(Object key, Object value) {
 //        Object prev = null;
 //        Node n = new Node(key, value);
@@ -29,7 +32,60 @@ public class HashTable {
 //    }
 
     public Object put(Object key, Object value){
-
+        if(size == array.length){
+            return null;
+        }
+        int hash = hash(key);
+        Node n = new Node(key, value);
+        if(array[hash] == null || array[hash].deleted){
+            array[hash] = n;
+            size++;
+            return null;
+        }else{
+            for(int i = hash; i < array.length; i++){
+                if(array[i].key.equals(key)){
+                    array[i] = n;
+                    return null;
+                }
+                if(array[i].key == null){
+                    array[i] = n;
+                    size++;
+                    return null;
+                }
+                if(array[i].deleted){
+                    array[i] = n;
+                    for(int x = i; x<array.length; x++){
+                        if(array[x].key.equals(key)){
+                            array[x] = n;
+                            return null;
+                        }
+                    }
+                    return null;
+                }
+            }
+            for(int i = 0; i < hash; i++){
+                if(array[i].key.equals(key)){
+                    array[i] = n;
+                    return null;
+                }
+                if(array[i].key == null){
+                    array[i] = n;
+                    size++;
+                    return null;
+                }
+                if(array[i].deleted){
+                    array[i] = n;
+                    for(int x = i; x<hash; x++){
+                        if(array[x].key.equals(key)){
+                            array[x] = n;
+                            return null;
+                        }
+                    }
+                    return null;
+                }
+            }
+        }
+        return null;
     }
 
     public Object remove(Object key){
@@ -71,8 +127,31 @@ public class HashTable {
         return null;
     }
 
+    //part 1
+
+//    public Object get(Object key){
+//        return array[hash(key)].value;
+//    }
+
     public Object get(Object key){
-        return array[hash(key)].value;
+        if(size == 0){
+            return null;
+        }
+        int hash = hash(key);
+        if(array[hash].key.equals(key)){
+            return array[hash];
+        }else{
+            for(int i = hash; i < array.length; i++) {
+                if(array[1].key.equals(key)) {
+                    return array[i];
+                }
+            }
+            for(int i = 0; i < hash; i++){
+                if(array[1].key.equals(key)) {
+                    return array[i];
+                }
+            }
+        }
     }
 
     private int hash(Object key){
