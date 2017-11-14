@@ -37,11 +37,28 @@ public class HashTable {
         }
         int hash = hash(key);
         Node n = new Node(key, value);
-        if(array[hash] == null || array[hash].deleted){
+        if(array[hash] == null){
             array[hash] = n;
             size++;
             return null;
-        }else{
+        }
+        if(array[hash].deleted){
+            array[hash] = n;
+            for(int x = hash; x<array.length; x++){
+                if(array[x].key.equals(key)){
+                    array[x] = n;
+                    return null;
+                }
+            }
+            for(int x = 0; x<hash; x++){
+                if(array[x].key.equals(key)){
+                    array[x] = n;
+                    return null;
+                }
+            }
+            return null;
+        }
+        else{
             for(int i = hash; i < array.length; i++){
                 if(array[i] == null){
                     array[i] = n;
