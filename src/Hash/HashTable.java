@@ -6,23 +6,69 @@ package Hash;
 public class HashTable {
 
     private Node[] array;
+    private int size;
 
     public HashTable(){
         array = new Node[101];
+        size = 0;
     }
 
     public HashTable(int startSize){
         array = new Node[startSize];
+        size = 0;
     }
 
-    public Object put(Object key, Object value) {
-        Object prev = null;
-        Node n = new Node(key, value);
-        if(array[hash(key)] != null){
-            prev = array[hash(key)];
+//    public Object put(Object key, Object value) {
+//        Object prev = null;
+//        Node n = new Node(key, value);
+//        if(array[hash(key)] != null){
+//            prev = array[hash(key)];
+//        }
+//        array[hash(key)] = n;
+//        return prev;
+//    }
+
+    public Object put(Object key, Object value){
+
+    }
+
+    public Object remove(Object key){
+        int hash = hash(key);
+        if(size == 0){
+            return null;
         }
-        array[hash(key)] = n;
-        return prev;
+        Node n = array[hash];
+        if(n.key.equals(key)){
+            n.deleted = true;
+            size--;
+            Object temp = n.value;
+            array[hash] = new Node();
+            array[hash].deleted = true;
+            return temp;
+
+        }else{
+            for(int i = hash; i < array.length; i++){
+                if(array[i].key == null){
+                    return null;
+                }
+                if(array[i].key.equals(key)){
+                    array[i].deleted = true;
+                    size--;
+                    return array[i].value;
+                }
+            }
+            for(int i = 0; i < hash; i++){
+                if(array[i].key == null){
+                    return null;
+                }
+                if(array[i].key.equals(key)){
+                    array[i].deleted = true;
+                    size--;
+                    return array[i].value;
+                }
+            }
+        }
+        return null;
     }
 
     public Object get(Object key){
@@ -47,7 +93,8 @@ public class HashTable {
     }
 
     private class Node{
-        public Object key, value;
+        Object key, value;
+        boolean deleted;
 
         public Node(){
 
@@ -56,6 +103,7 @@ public class HashTable {
         public Node(Object key, Object value){
             this.key = key;
             this.value = value;
+            this.deleted = false;
         }
 
         @Override
