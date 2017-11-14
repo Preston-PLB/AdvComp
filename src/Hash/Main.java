@@ -2,6 +2,7 @@ package Hash;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -17,6 +18,13 @@ public class Main {
             ht.put(Integer.parseInt(raw[0]), raw[1]);
         }
         System.out.println(ht);
+        System.out.println(Arrays.toString(ht.getArray()));
+        System.out.println(ht.remove(22));
+        System.out.println(ht);
+        System.out.println(Arrays.toString(ht.getArray()));
+        System.out.println(ht.put(22, "alli"));
+        System.out.println(ht);
+        System.out.println(Arrays.toString(ht.getArray()));
     }
 
 }

@@ -43,13 +43,13 @@ public class HashTable {
             return null;
         }else{
             for(int i = hash; i < array.length; i++){
-                if(array[i].key.equals(key)){
-                    array[i] = n;
-                    return null;
-                }
-                if(array[i].key == null){
+                if(array[i] == null){
                     array[i] = n;
                     size++;
+                    return null;
+                }
+                if(array[i].key.equals(key)){
+                    array[i] = n;
                     return null;
                 }
                 if(array[i].deleted){
@@ -64,13 +64,13 @@ public class HashTable {
                 }
             }
             for(int i = 0; i < hash; i++){
-                if(array[i].key.equals(key)){
-                    array[i] = n;
-                    return null;
-                }
-                if(array[i].key == null){
+                if(array[i] == null){
                     array[i] = n;
                     size++;
+                    return null;
+                }
+                if(array[i].key.equals(key)){
+                    array[i] = n;
                     return null;
                 }
                 if(array[i].deleted){
@@ -104,7 +104,7 @@ public class HashTable {
 
         }else{
             for(int i = hash; i < array.length; i++){
-                if(array[i].key == null){
+                if(array[i] == null){
                     return null;
                 }
                 if(array[i].key.equals(key)){
@@ -114,7 +114,7 @@ public class HashTable {
                 }
             }
             for(int i = 0; i < hash; i++){
-                if(array[i].key == null){
+                if(array[i] == null){
                     return null;
                 }
                 if(array[i].key.equals(key)){
@@ -142,21 +142,26 @@ public class HashTable {
             return array[hash];
         }else{
             for(int i = hash; i < array.length; i++) {
-                if(array[1].key.equals(key)) {
+                if(array[i].key.equals(key)){
                     return array[i];
                 }
             }
             for(int i = 0; i < hash; i++){
-                if(array[1].key.equals(key)) {
+                if(array[i].key.equals(key)){
                     return array[i];
                 }
             }
         }
+        return null;
     }
 
     private int hash(Object key){
         int raw = key.hashCode();
         return raw%array.length;
+    }
+
+    Node[] getArray(){
+        return  array;
     }
 
     @Override
@@ -187,6 +192,9 @@ public class HashTable {
 
         @Override
         public String toString() {
+            if(deleted){
+                return "dummy";
+            }
             return key.toString()+" "+value.toString();
         }
     }
