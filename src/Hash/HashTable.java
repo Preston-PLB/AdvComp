@@ -5,6 +5,10 @@ package Hash;
  */
 public class HashTable {
 
+    private int insertCollisions = 0;
+    private int fetchExistCollisions = 0;
+    private int fetchVoidCollisions = 0;
+
     private Node[] array;
     private int size;
 
@@ -17,19 +21,6 @@ public class HashTable {
         array = new Node[startSize];
         size = 0;
     }
-
-
-    //Part 1
-
-//    public Object put(Object key, Object value) {
-//        Object prev = null;
-//        Node n = new Node(key, value);
-//        if(array[hash(key)] != null){
-//            prev = array[hash(key)];
-//        }
-//        array[hash(key)] = n;
-//        return prev;
-//    }
 
     public Object put(Object key, Object value){
         if(size == array.length){
@@ -49,12 +40,14 @@ public class HashTable {
                     array[x] = n;
                     return null;
                 }
+                insertCollisions++;
             }
             for(int x = 0; x<hash; x++){
                 if(array[x].key.equals(key)){
                     array[x] = n;
                     return null;
                 }
+                insertCollisions++;
             }
             return null;
         }
@@ -76,9 +69,11 @@ public class HashTable {
                             array[x] = n;
                             return null;
                         }
+                        insertCollisions++;
                     }
                     return null;
                 }
+                insertCollisions++;
             }
             for(int i = 0; i < hash; i++){
                 if(array[i] == null){
@@ -97,9 +92,11 @@ public class HashTable {
                             array[x] = n;
                             return null;
                         }
+                        insertCollisions++;
                     }
                     return null;
                 }
+                insertCollisions++;
             }
         }
         return null;
@@ -144,13 +141,8 @@ public class HashTable {
         return null;
     }
 
-    //part 1
-
-//    public Object get(Object key){
-//        return array[hash(key)].value;
-//    }
-
     public Object get(Object key){
+        int temp = 0;
         if(size == 0){
             return null;
         }
@@ -160,15 +152,20 @@ public class HashTable {
         }else{
             for(int i = hash; i < array.length; i++) {
                 if(array[i].key.equals(key)){
+                    fetchExistCollisions += temp;
                     return array[i];
                 }
+                temp++;
             }
             for(int i = 0; i < hash; i++){
                 if(array[i].key.equals(key)){
+                    fetchExistCollisions += temp;
                     return array[i];
                 }
+                temp++;
             }
         }
+        fetchVoidCollisions += temp;
         return null;
     }
 
@@ -179,6 +176,18 @@ public class HashTable {
 
     Node[] getArray(){
         return  array;
+    }
+
+    public int getInsertCollisions(){
+        return insertCollisions;
+    }
+
+    public int getFetchExistCollisions() {
+        return fetchExistCollisions;
+    }
+
+    public int getFetchVoidCollisions() {
+        return fetchVoidCollisions;
     }
 
     @Override
@@ -192,6 +201,12 @@ public class HashTable {
         }
         return sb.toString();
     }
+
+    /*
+    *
+    * ANOTHER CLASS DUMMY
+    *
+    * */
 
     private class Node{
         Object key, value;

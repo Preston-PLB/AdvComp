@@ -2,7 +2,7 @@ package Hash;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -11,20 +11,29 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner s = new Scanner(new File("redux.txt"));
-        HashTable ht = new HashTable(10);
-        while(s.hasNextLine()){
-            String[] raw = s.nextLine().split(" ");
-            ht.put(Integer.parseInt(raw[0]), raw[1]);
+        ArrayList<String> raw = new ArrayList<>();
+        ArrayList<String> success = new ArrayList<>();
+        ArrayList<String> fail = new ArrayList<>();
+        Scanner s = new Scanner(new File("build.txt"));
+        while(s.hasNextLine()) {
+            raw.add(s.nextLine().trim());
         }
-        System.out.println(ht);
-        System.out.println(Arrays.toString(ht.getArray()));
-        System.out.println(ht.remove(22));
-        System.out.println(ht);
-        System.out.println(Arrays.toString(ht.getArray()));
-        System.out.println(ht.put(22, "alli"));
-        System.out.println(ht);
-        System.out.println(Arrays.toString(ht.getArray()));
+        HashTable sparse = new HashTable(10007);
+        HashTable split = new HashTable(2003);
+        HashTable tight = new HashTable(1259);
+        HashTable dense = new HashTable(1117);
+        HashTable full = new HashTable(1001);
+
+        long buildStart = System.nanoTime();
+        for(String string: raw){
+            String[] temp = string.split(" ");
+            sparse.put(Integer.parseInt(temp[0]), temp[1]);
+        }
+        long buildTime = System.nanoTime()-buildStart;
+
+        System.out.println((double)buildTime/1000000.0/1000);
+        System.out.println(sparse.getInsertCollisions());
+        System.out.println((double)sparse.getInsertCollisions()/1000*100.0);
     }
 
 }
