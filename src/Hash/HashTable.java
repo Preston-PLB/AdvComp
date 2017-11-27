@@ -170,7 +170,7 @@ public class HashTable {
     }
 
     private int hash(Object key){
-        int raw = key.hashCode();
+        int raw = Math.abs(key.hashCode());
         return raw%array.length;
     }
 
