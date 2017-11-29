@@ -147,10 +147,16 @@ public class HashTable {
             return null;
         }
         int hash = hash(key);
+        if(array[hash] == null){
+            return null;
+        }
         if(array[hash].key.equals(key)){
             return array[hash];
         }else{
             for(int i = hash; i < array.length; i++) {
+                if(array[i] == null){
+                    return null;
+                }
                 if(array[i].key.equals(key)){
                     fetchExistCollisions += temp;
                     return array[i];
@@ -158,6 +164,9 @@ public class HashTable {
                 temp++;
             }
             for(int i = 0; i < hash; i++){
+                if(array[i] == null){
+                    return null;
+                }
                 if(array[i].key.equals(key)){
                     fetchExistCollisions += temp;
                     return array[i];
