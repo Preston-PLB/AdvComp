@@ -1,6 +1,7 @@
 package Hash;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class Main {
         FileWriter fw = new FileWriter("out.csv");
         PrintWriter pw = new PrintWriter(fw);
 
-        pw.print("Load factor, Build time, Total insert collisions, Percent of collisions per insert, Avg search time, Collisions per search, Avg fail time, Collisions per fail\n");
+        pw.print("Load factor, Avg. insertion time, Total insert collisions, Percent of collisions per insert, Avg search time, Collisions per search, Avg fail time, Collisions per fail\n");
         while(s.hasNextLine()) {
             raw.add(s.nextLine().trim());
         }
@@ -29,13 +30,13 @@ public class Main {
         while(s.hasNextLine()) {
             fail.add(s.nextLine().trim());
         }
-        HashTable[] tables = new HashTable[5];
+        HashTableQuad[] tables = new HashTableQuad[5];
 
-        tables[0] = new HashTable(500009);
-        tables[1] = new HashTable(100003);
-        tables[2] = new HashTable(62501);
-        tables[3] = new HashTable(55579);
-        tables[4] = new HashTable(50021);
+        tables[0] = new HashTableQuad(findNextPrime(5000000));
+        tables[1] = new HashTableQuad(findNextPrime(1000000));
+        tables[2] = new HashTableQuad(findNextPrime(625000));
+        tables[3] = new HashTableQuad(findNextPrime(555555));
+        tables[4] = new HashTableQuad(findNextPrime(500000));
 
         for(int i = 0; i<5; i++){
             long buildStart = System.currentTimeMillis();
@@ -57,17 +58,17 @@ public class Main {
             for(String string: fail){
                 tables[i].get(Integer.parseInt(string.substring(0, string.indexOf(' '))));
             }
-            long unsuccTime = System.currentTimeMillis()-succStart;
+            long unsuccTime = System.currentTimeMillis()-unsuccStart;
             int unsuccCollids = (tables[i].getFetchExistCollisions()+tables[i].getFetchVoidCollisions())-succCollids;
 
             pw.print("temp,");
-            pw.printf("%.6f,",(double)buildTime/500000);
+            pw.printf("%10.6f,",(double)buildTime/500000);
             pw.printf("%d,",tables[i].getInsertCollisions());
-            pw.printf("%.2f%%,",tables[i].getInsertCollisions()/500000/100.0);
-            pw.printf("%.4f,",succTime/10000.0);
-            pw.printf("%.4f,",succCollids/10000.0);
-            pw.printf("%.4f,",unsuccTime/10000.0);
-            pw.printf("%.4f",unsuccCollids/10000.0);
+            pw.printf("%10.2f%%,",tables[i].getInsertCollisions()/500000/100.0);
+            pw.printf("%10.4f,",succTime/10000.0);
+            pw.printf("%10.4f,",succCollids/10000.0);
+            pw.printf("%10.4f,",unsuccTime/10000.0);
+            pw.printf("%10.4f",unsuccCollids/10000.0);
             pw.printf("\n");
 
 //            pw.printf("build time: %.6f\n",(double)buildTime/50000);
@@ -80,6 +81,33 @@ public class Main {
         }
         pw.close();
         fw.close();
+    }
+
+    private static int findNextPrime(int p){
+        int i = p;
+        while(true){
+            if(isPrime(i)){
+                return i;
+            }
+            i++;
+        }
+    }
+
+
+
+    private static boolean isPrime(int i) {
+        if(i == 2){
+            return false;
+        }
+        if(i % 2 == 0){
+            return false;
+        }
+        for(int x = 3; x<Math.sqrt(i); x+=2){
+            if(i % x == 0){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
