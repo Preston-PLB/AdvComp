@@ -17,6 +17,19 @@ public class Name {
         this.last = last;
     }
 
+    public boolean equals(Object o){
+        Name n = (Name)o;
+        return (n.getFirst().equals(first) && n.getLast().equals(last));
+    }
+
+    public String getFirst(){
+        return first;
+    }
+
+    public String getLast(){
+        return last;
+    }
+
     public int hashCode(){
         char[] arr = (first+last).toCharArray();
         long hash = 0;
