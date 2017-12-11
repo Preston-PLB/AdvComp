@@ -32,13 +32,13 @@ public class MainCustom {
         while(s.hasNextLine()) {
             fail.add(s.nextLine().trim());
         }
-        HashTableQuad[] tables = new HashTableQuad[5];
+        HashTable[] tables = new HashTable[5];
 
-        tables[0] = new HashTableQuad(findNextPrime(5000000));
-        tables[1] = new HashTableQuad(findNextPrime(1000000));
-        tables[2] = new HashTableQuad(findNextPrime(62500));
-        tables[3] = new HashTableQuad(findNextPrime(55555));
-        tables[4] = new HashTableQuad(findNextPrime(50000));
+        tables[0] = new HashTable(findNextPrime(5000000));
+        tables[1] = new HashTable(findNextPrime(1000000));
+        tables[2] = new HashTable(findNextPrime(62500));
+        tables[3] = new HashTable(findNextPrime(55555));
+        tables[4] = new HashTable(findNextPrime(50000));
 
         for(int i = 0; i<5; i++){
             long buildStart = System.currentTimeMillis();

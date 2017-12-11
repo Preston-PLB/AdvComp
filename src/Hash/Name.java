@@ -36,8 +36,8 @@ public class Name {
         char[] arr = (first+last).toCharArray();
         BigInteger hash = new BigInteger("0");
         for(int i = 0; i<arr.length; i++){
-            hash.add(new BigInteger(Integer.toString((int)Math.pow(arr[i]-48, 52))));
+            hash = hash.add(new BigInteger(Integer.toString(arr[i]*(int)Math.pow(52, i))));
         }
-        return Integer.parseInt(hash.mod(new BigInteger("0xffff")).toString());
+        return Integer.parseInt(hash.mod(new BigInteger("1000000000")).toString());
     }
 }
