@@ -1,5 +1,7 @@
 package Hash;
 
+import java.math.BigInteger;
+
 /**
  * Created by 131111 on 12/5/2017.
  */
@@ -32,10 +34,10 @@ public class Name {
 
     public int hashCode(){
         char[] arr = (first+last).toCharArray();
-        long hash = 0;
+        BigInteger hash = new BigInteger("0");
         for(int i = 0; i<arr.length; i++){
-            hash += Math.pow(((int)(arr[i]))-48, 52);
+            hash.add(new BigInteger(Integer.toString((int)Math.pow(arr[i]-48, 52))));
         }
-        return (int)hash%Integer.MAX_VALUE;
+        return Integer.parseInt(hash.mod(new BigInteger("0xffff")).toString());
     }
 }
