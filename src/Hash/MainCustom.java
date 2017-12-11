@@ -74,14 +74,6 @@ public class MainCustom {
             pw.printf("%10.4f,",unsuccTime/10000.0);
             pw.printf("%10.4f",unsuccCollids/10000.0);
             pw.printf("\n");
-
-//            pw.printf("build time: %.6f\n",(double)buildTime/50000);
-//            pw.printf("# of collisions: %d\n",tables[i].getInsertCollisions());
-//            pw.printf("Avg # of collision: %.2f%%\n",tables[i].getInsertCollisions()/50000/100.0);
-//            pw.printf("Collisions per Insert: %.2f\n",(double)tables[i].getInsertCollisions()/50000*100.0);
-//            pw.printf("Avg search time and # of collisions per item: %.4f -- %.4f\n",succTime/1000.0,succCollids/1000.0);
-//            pw.printf("Avg fail time and # of collisions per item: %.4f -- %.4f\n",unsuccTime/1000.0,unsuccCollids/1000.0);
-//            pw.printf("\n");
         }
         pw.close();
         fw.close();
@@ -96,8 +88,6 @@ public class MainCustom {
             i++;
         }
     }
-
-
 
     private static boolean isPrime(int i) {
         if(i == 2){
