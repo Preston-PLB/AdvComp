@@ -1,5 +1,6 @@
 package Hash;
 
+import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -17,106 +18,55 @@ public class HashTableLL {
 
     @SuppressWarnings("unchecked")
     public HashTableLL(){
-        array = new ArrayDeque[101];
+        array = (ArrayDeque<Node>[])Array.newInstance(ArrayDeque.class, 101);
         size = 0;
     }
 
     @SuppressWarnings("unchecked")
     public HashTableLL(int startSize){
-        array = new ArrayDeque[startSize];
+        array = (ArrayDeque<Node>[])Array.newInstance(ArrayDeque.class, startSize);
         size = 0;
     }
 
     public Object put(Object key, Object value){
+        Node pair = new Node(key, value);
         int hash = hash(key);
         if(array[hash] == null){
             array[hash] = new ArrayDeque<>();
-            array[hash].add(new Node(key, value));
+            array[hash].add(pair);
             size++;
             return null;
         }
-        array[hash].add(new Node(key, value));
         ArrayDeque<Node> temp = new ArrayDeque<>();
-        for(int i = 0; i<array[hash].size()-1; i++){
 
-        }
-        return null;
-    }
-
-    public Object remove(Object key){
-        int hash = hash(key);
-        if(size == 0){
-            return null;
-        }
-        Node n = array[hash];
-        if(n.key.equals(key)){
-            n.deleted = true;
-            size--;
-            Object temp = n.value;
-            array[hash] = new Node();
-            array[hash].deleted = true;
-            return temp;
-
-        }else{
-            for(int i = hash; i < array.length; i++){
-                if(array[i] == null){
-                    return null;
-                }
-                if(array[i].key.equals(key)){
-                    array[i].deleted = true;
-                    size--;
-                    return array[i].value;
-                }
+        for(int i = 0; i<array[hash].size(); i++){
+            Node n = array[hash].pop();
+            if(!n.equals(pair)){
+                temp.add(n);
             }
-            for(int i = 0; i < hash; i++){
-                if(array[i] == null){
-                    return null;
-                }
-                if(array[i].key.equals(key)){
-                    array[i].deleted = true;
-                    size--;
-                    return array[i].value;
-                }
-            }
+            insertCollisions++;
         }
+        temp.add(pair);
+        array[hash] = temp;
+
         return null;
     }
 
     public Object get(Object key){
-        int temp = 0;
-        if(size == 0){
-            return null;
-        }
         int hash = hash(key);
         if(array[hash] == null){
             return null;
         }
-        if(array[hash].key.equals(key)){
-            return array[hash];
-        }else{
-            for(int i = hash; i < array.length; i++) {
-                if(array[i] == null){
-                    return null;
-                }
-                if(array[i].key.equals(key)){
-                    fetchExistCollisions += temp;
-                    return array[i];
-                }
-                temp++;
-            }
-            for(int i = 0; i < hash; i++){
-                if(array[i] == null){
-                    return null;
-                }
-                if(array[i].key.equals(key)){
-                    fetchExistCollisions += temp;
-                    return array[i];
-                }
-                temp++;
-            }
+        if(array[hash].size() == 1){
+            return array[hash].peek();
         }
-        fetchVoidCollisions += temp;
-        return null;
+        for(Node n: array[hash]){
+            if(n.key.equals(key)){
+                return n;
+            }
+            fetchExistCollisions++;
+        }
+        return false;
     }
 
     private int hash(Object key){
@@ -124,8 +74,8 @@ public class HashTableLL {
         return raw%array.length;
     }
 
-    Node[] getArray(){
-        return  array;
+    ArrayDeque[] getArray(){
+        return array;
     }
 
     public int getInsertCollisions(){
@@ -143,10 +93,13 @@ public class HashTableLL {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Node n: array){
-            if(n != null) {
+        for(ArrayDeque<Node> ad: array){
+            if(ad == null){
+                continue;
+            }
+            for(Node n: ad){
                 sb.append(n);
-                sb.append(", ");
+                sb.append(',');
             }
         }
         return sb.toString();
