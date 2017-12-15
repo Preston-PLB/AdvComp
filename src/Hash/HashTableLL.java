@@ -5,7 +5,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * Created by 131111 on 11/6/2017.
+ * Created by 131111 on 12/10/2017.
  */
 public class HashTableLL {
 
@@ -66,7 +66,7 @@ public class HashTableLL {
             }
             fetchExistCollisions++;
         }
-        return false;
+        return null;
     }
 
     private int hash(Object key){
