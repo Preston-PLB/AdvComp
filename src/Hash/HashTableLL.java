@@ -58,11 +58,11 @@ public class HashTableLL {
             return null;
         }
         if(array[hash].size() == 1){
-            return array[hash].peek();
+            return array[hash].peek().value;
         }
         for(Node n: array[hash]){
             if(n.key.equals(key)){
-                return n;
+                return n.value;
             }
             fetchExistCollisions++;
         }
