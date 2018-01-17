@@ -5,11 +5,12 @@ package Hash.Program;
  */
 public class Info {
 
-    private String org;
+    private String org, name;
     private boolean eligible;
 
-    public Info(String org){
+    public Info(String org, String name){
         this.org = org;
+        this.name = name;
         eligible = true;
     }
 
@@ -19,6 +20,14 @@ public class Info {
 
     void unEleigible(){
         eligible = false;
+    }
+
+    String getOrg(){
+        return org;
+    }
+
+    String getName(){
+        return name;
     }
 
 }
