@@ -9,8 +9,9 @@ public class Organization implements Comparable {
     private String name;
     private int students;
 
-    public Organization(String name){
+    public Organization(String name, int students){
         this.name = name;
+        this.students = students;
     }
 
 
@@ -18,10 +19,11 @@ public class Organization implements Comparable {
     public int compareTo(Object o) {
         Organization org = (Organization)o;
         if(this.students > org.getStudents()){
-            return 1;
+            return -1;
         }if(this.students == org.getStudents() && this.getName().compareTo(org.getName()) < 0){
-
+            return -1;
         }
+        return 1;
     }
 
     public void setStudents(int students) {
@@ -38,5 +40,9 @@ public class Organization implements Comparable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String toString(){
+        return name+" "+students;
     }
 }

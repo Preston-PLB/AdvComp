@@ -21,16 +21,37 @@ public class OpenSource {
                 org = str;
                 students.put(org, new HashSet<>());
             }else if(str.charAt(0) == '1'){
+                ArrayList<Organization> orgs = new ArrayList<>();
+                HashMap<String, Boolean> eli = new HashMap<>();
                 for(Map.Entry set: students.entrySet()){
                     HashSet<String> temp = (HashSet<String>) set.getValue();
-                    System.out.print(set.getKey()+" "+temp.size());
-                    System.out.print("\n");
+                    for(String string: temp){
+                        if(eli.containsKey(string)){
+                            eli.put(string, true);
+                        }else{
+                            eli.put(string, false);
+                        }
+                    }
+                }
+                for(Map.Entry set: students.entrySet()){
+                    HashSet<String> temp = (HashSet<String>) set.getValue();
+                    int i = 0;
+                    for(String string: temp){
+                        if(!eli.get(string)){
+                            i++;
+                        }
+                    }
+                    orgs.add(new Organization((String)set.getKey(), i));
+                }
+                Collections.sort(orgs);
+                for(Organization o: orgs){
+                    System.out.println(o);
                 }
                 System.out.print("\n\n");
             }else if(str.charAt(0) == '0'){
                 break;
             }else{
-                    students.get(org).add(str);
+                students.get(org).add(str);
             }
         }
 
