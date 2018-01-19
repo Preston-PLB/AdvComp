@@ -11,12 +11,14 @@ public class TreeCounter {
         Scanner s = new Scanner(new File("trees.dat"));
 
         s.next();
-        s.next();
 
         HashMap<String, Tree> trees = new HashMap<>();
         ArrayList<Tree> sortedTrees = new ArrayList<>();
         while(s.hasNextLine()){
             String str = s.nextLine().trim();
+            if(str.equals(" ") || str.equals("")){
+                continue;
+            }
             if(trees.containsKey(str)){
                 trees.get(str).incFreq();
             }else{

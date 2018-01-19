@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-/**
- * Created by 131111 on 1/4/2018.
- */
 public class OpenSource {
 
     @SuppressWarnings("unchecked")
@@ -54,9 +51,5 @@ public class OpenSource {
                 students.get(org).add(str);
             }
         }
-
-
-
     }
-
 }
