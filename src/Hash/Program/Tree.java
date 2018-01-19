@@ -18,6 +18,7 @@ public class Tree implements Comparable{
 
     public void incFreq() {
         freq++;
+        total++;
     }
 
     public String getName() {
@@ -29,7 +30,7 @@ public class Tree implements Comparable{
     }
 
     public double calcPrecent(){
-        return freq/total;
+        return freq/total*100;
     }
 
     @Override
@@ -40,10 +41,6 @@ public class Tree implements Comparable{
 
     @Override
     public String toString() {
-        return name+" "+cheeky(calcPrecent(), 4);
-    }
-
-    private double cheeky(double raw, int length){
-        return (raw*Math.pow(10,length))/Math.pow(10, length);
+        return name+" "+Math.round(calcPrecent()*10000)/10000.0;
     }
 }

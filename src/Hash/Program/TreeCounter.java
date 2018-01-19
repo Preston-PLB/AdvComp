@@ -16,7 +16,7 @@ public class TreeCounter {
         HashMap<String, Tree> trees = new HashMap<>();
         ArrayList<Tree> sortedTrees = new ArrayList<>();
         while(s.hasNextLine()){
-            String str = s.nextLine();
+            String str = s.nextLine().trim();
             if(trees.containsKey(str)){
                 trees.get(str).incFreq();
             }else{
