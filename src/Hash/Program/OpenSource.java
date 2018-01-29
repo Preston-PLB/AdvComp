@@ -44,7 +44,8 @@ public class OpenSource {
                 for(Organization o: orgs){
                     System.out.println(o);
                 }
-                System.out.print("\n\n");
+                System.out.print("\n");
+                students = new HashMap<>();
             }else if(str.charAt(0) == '0'){
                 break;
             }else{
