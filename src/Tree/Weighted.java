@@ -15,57 +15,38 @@ public class Weighted {
         int tc = s.nextInt();
         s.nextLine();
 
-        for(int i = 0; i < tc; i++){
-            String line = s.nextLine();
-            if(line.length() == 1){
-                System.out.println("Tree "+ (i+1)+" is a right-tree");
-                continue;
-            }
-            String temp = line.substring(1);
-            if(line.length() == 2){
-                System.out.println("Tree "+ (i+1)+" is not a right-tree");
-            }
-            int left, right, level;
-                left = right = 0;
-                level = 2;
-
-            while(temp.length() > level){
-                String str = temp.substring(0,level/2);
-                for(char c: str.toCharArray()){
-                    if(c == '1'){
-                        left++;
-                    }
-                }
-                temp = temp.substring(level/2+1);
-                str = temp.substring(0,level/2);
-                for(char c: str.toCharArray()){
-                    if(c == '1'){
-                        right++;
-                    }
-                }
-                level *= 2;
-            }
-            String str = temp.substring(0,level/2);
-            for(char c: str.toCharArray()){
-                if(c == '1'){
-                    left++;
-                }
-            }
-            temp = temp.substring(level/2+1);
-            str = temp;
-            for(char c: str.toCharArray()){
-                if(c == '1'){
-                    right++;
-                }
+        for(int i = 1; i<=tc; i++){
+            String raw = s.nextLine();
+            char[] chars = raw.toCharArray();
+            int[] weight = new int[chars.length];
+            for(int x = 0; x<chars.length; x++){
+                weight[x] = (int)chars[x]-48;
             }
 
-            if(right >= left){
-                System.out.println("Tree "+ (i+1)+" is a right-tree");
+            if(isRight(weight)){
+                System.out.println("Tree "+ i +" is a right-tree.");
             }else{
-                System.out.println("Tree "+ (i+1)+" is a not right-tree");
+                System.out.println("Tree "+ i +" is not a right-tree.");
             }
-
         }
     }
 
+    private static boolean isRight(int[] nums){
+        if(nums.length == 1){
+            return true;
+        }
+        if(nums.length != Math.pow(2, Math.ceil(Math.log(nums.length)/Math.log(2)))-1){
+            return false;
+        }
+
+        for(int i = nums.length-2; i > 0; i-=2){
+            if(nums[i] > nums[i+1]){
+                return false;
+            }else{
+                nums[(i-1)/2] += nums[i] + nums[i+1];
+            }
+        }
+
+        return true;
+    }
 }
