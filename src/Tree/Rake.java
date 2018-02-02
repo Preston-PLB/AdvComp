@@ -29,24 +29,24 @@ public class Rake {
             for(char c: chars){
                 if(c == '-'){
                     if(!left){
-                        column++;
                         left = true;
                     }else{
+                        column++;
                         left = false;
                     }
                 }else{
                     if(left){
                         if(!columns.containsKey(column)){
-                            columns.put(column, 1);
+                            columns.put(column, c-48);
                         }else{
-                            columns.put(column, columns.get(column));
+                            columns.put(column, columns.get(column)+(c-48));
                         }
                         column -= 1;
                     }else{
                         if(!columns.containsKey(column)){
-                            columns.put(column, 1);
+                            columns.put(column, c-48);
                         }else{
-                            columns.put(column, columns.get(column));
+                            columns.put(column, columns.get(column)+(c-48));
                         }
                         column += 1;
                     }
