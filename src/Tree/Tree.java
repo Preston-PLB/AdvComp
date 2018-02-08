@@ -1,7 +1,5 @@
 package Tree;
 
-import LinkedLists.Node;
-
 import java.util.HashMap;
 
 public class Tree {
