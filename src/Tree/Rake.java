@@ -2,12 +2,8 @@ package Tree;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.Scanner;
 
-/**
- * Created by 131111 on 1/31/2018.
- */
 public class Rake {
 
     public static void main(String[] args) throws FileNotFoundException {
