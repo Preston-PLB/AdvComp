@@ -14,48 +14,22 @@ public class Rake {
         Scanner s = new Scanner(new File("rake.dat"));
 
         while(s.hasNextLine()){
-            String line = s.nextLine();
+            String line = s.nextLine().trim();
             if(line.equals("-1")){
-                return;
+                break;
+            }
+            String[] nums = line.split(" ");
+
+            int[] trees = new int[nums.length];
+
+            for(int i = 0; i<nums.length; i++){
+                trees[i] = Integer.parseInt(nums[i]);
             }
 
-            HashMap<Integer, Integer> columns = new HashMap<>();
+            Tree t = new Tree(trees);
+            t.fill();
 
-            char[] chars = line.replaceAll("-1", "-").replaceAll(" ", "").toCharArray();
-
-            int column = 0;
-            boolean left = true;
-
-            for(char c: chars){
-                if(c == '-'){
-                    if(!left){
-                        left = true;
-                    }else{
-                        column++;
-                        left = false;
-                    }
-                }else{
-                    if(left){
-                        if(!columns.containsKey(column)){
-                            columns.put(column, c-48);
-                        }else{
-                            columns.put(column, columns.get(column)+(c-48));
-                        }
-                        column -= 1;
-                    }else{
-                        if(!columns.containsKey(column)){
-                            columns.put(column, c-48);
-                        }else{
-                            columns.put(column, columns.get(column)+(c-48));
-                        }
-                        column += 1;
-                    }
-                }
-            }
-            for(Integer i: columns.values()){
-                System.out.print(i+" ");
-            }
-            System.out.println();
+            System.out.println(t);
         }
     }
 
