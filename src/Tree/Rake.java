@@ -27,8 +27,9 @@ public class Rake {
             Tree t = new Tree(trees);
             t.fill();
 
-            System.out.println("Case: "+c);
+            System.out.println("Case "+c+":");
             System.out.println(t);
+            System.out.println();
             c++;
         }
     }
