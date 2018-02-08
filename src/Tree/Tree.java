@@ -36,7 +36,6 @@ public class Tree {
         if(weights[index] == -1){
             return;
         }
-        farRight = farRight < node.pos+1 ? node.pos+1 : farRight;
         node.right = new Node(node.pos+1, weights[index]);
         visit(node.right);
     }
@@ -46,7 +45,6 @@ public class Tree {
         if(weights[index] == -1){
             return;
         }
-        farLeft = farLeft > node.pos-1 ? node.pos-1 : farLeft;
         node.left = new Node(node.pos-1, weights[index]);
         visit(node.left);
     }
