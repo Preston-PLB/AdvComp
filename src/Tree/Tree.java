@@ -53,11 +53,18 @@ public class Tree {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        for(int i = farLeft; i<=farRight; i++){
-            if(columns.get(i) != null){
-                sb.append(columns.get(i));
-                sb.append(' ');
+        int low = 0;
+        for(Integer i: columns.keySet()){
+            if(i < low){
+                low = i;
             }
+        }
+
+        int i = low;
+        while(columns.containsKey(i)){
+            sb.append(columns.get(i));
+            sb.append(' ');
+            i++;
         }
         return sb.toString();
     }
