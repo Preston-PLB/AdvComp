@@ -9,6 +9,8 @@ public class Rake {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner s = new Scanner(new File("rake.dat"));
 
+        int c = 1;
+
         while(s.hasNextLine()){
             String line = s.nextLine().trim();
             if(line.equals("-1")){
@@ -25,7 +27,9 @@ public class Rake {
             Tree t = new Tree(trees);
             t.fill();
 
+            System.out.println("Case: "+c);
             System.out.println(t);
+            c++;
         }
     }
 
