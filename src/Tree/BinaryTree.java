@@ -2,16 +2,18 @@ package Tree;
 
 public class BinaryTree {
 
-    Node root;
-    int size;
+    private Node root;
+    private int size;
+    private String out;
+
 
     public BinaryTree(){
-        Node root = new Node();
+        root = new Node();
         size = 1;
     }
 
     public BinaryTree(double value){
-        Node root = new Node(value);
+        root = new Node(value);
         size = 1;
     }
 
@@ -30,6 +32,7 @@ public class BinaryTree {
                 parent.right = new Node(val);
             }
         }
+        size++;
     }
 
     private Node findParent(double val, Node node){
@@ -39,12 +42,26 @@ public class BinaryTree {
             return node;
         }else{
             if(val <= node.value){
-                findParent(val, node.left);
+                return findParent(val, node.left);
             }else{
-                findParent(val, node.right);
+                return findParent(val, node.right);
             }
         }
-        return new Node();
+    }
+
+    private void traverse(Node node){
+        if(node == null){
+            return;
+        }
+            out+=node.value+", ";
+            traverse(node.left);
+            traverse(node.right);
+    }
+
+    public String toString(){
+        out = "";
+        traverse(root);
+        return out;
     }
 
     //
