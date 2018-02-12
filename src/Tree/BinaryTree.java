@@ -2,9 +2,7 @@ package Tree;
 
 import LinkedLists.LinkedListStack;
 
-import java.util.ArrayList;
-
-public class BinaryTree {
+public class BinaryTree{
 
     private Node root;
     private int size;
