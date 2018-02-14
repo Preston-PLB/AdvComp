@@ -1,5 +1,7 @@
 package Tree.Heap;
 
+import java.util.Arrays;
+
 public class Heap {
 
     private int[] arr;
@@ -22,6 +24,9 @@ public class Heap {
         return 2*index+2 < size;
     }
     private boolean hasParent(int index){
+        if(index == 3){
+            return true;
+        }
         return (index-1)/2 > 0;
     }
 
@@ -42,7 +47,7 @@ public class Heap {
         return arr[2*index+1];
     }
     private int getParent(int index){
-        return arr[(index-1)/2];
+        return arr[getParentI(index)];
     }
 
     private void swap(int x, int y){
@@ -67,9 +72,21 @@ public class Heap {
     }
 
     public void insert(int value){
-        arr[size] = value;
+        if(size == 0){
+            arr[0] = value;
+        }else{
+            int temp = size;
+            arr[temp] = value;
+            while(temp > 0 && arr[temp] < arr[getParentI(temp)]){
+                swap(temp, getParentI(temp));
+                temp = getParentI(temp);
+            }
+        }
         size++;
-        heapUp();
+    }
+
+    public boolean topIsUnique(){
+        return arr[0] != arr[1] && arr[0] != arr[2];
     }
 
     private void heapDown() {
@@ -95,5 +112,10 @@ public class Heap {
             swap(i, getParentI(i));
             i = getParentI(i);
         }
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(arr);
     }
 }

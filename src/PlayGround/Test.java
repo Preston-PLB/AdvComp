@@ -3,18 +3,20 @@ package PlayGround;
 import Hash.HashTableLL;
 import Hash.Name;
 import LinkedLists.LinkedListStack;
+import Tree.Heap.Heap;
 
 import java.math.BigInteger;
 
 public class Test {
 
     public static void main(String[] args){
-        HashTableLL ht = new HashTableLL(17);
-        ht.put(11, "dum dum dum");
-        ht.put(22, "tehge");
-        ht.put(0,  "fart");
-        ht.put(17, "poop");
+        Heap heap = new Heap(5);
+        heap.insert(5);
+        heap.insert(2);
+        heap.insert(6);
+        heap.insert(22);
+        heap.insert(4);
 
-        System.out.println(ht);
+        System.out.println(heap);
     }
 }
