@@ -106,14 +106,6 @@ public class Heap {
         }
     }
 
-    private void heapUp(){
-        int i = size-1;
-        while(hasParent(i) && getParent(i) < arr[i]){
-            swap(i, getParentI(i));
-            i = getParentI(i);
-        }
-    }
-
     @Override
     public String toString() {
         return Arrays.toString(arr);
