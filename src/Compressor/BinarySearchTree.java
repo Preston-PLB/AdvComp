@@ -2,7 +2,7 @@ package Compressor;
 
 import LinkedLists.LinkedListStack;
 
-public class BinarySearchTree {
+public class BinarySearchTree implements Comparable {
 
 
     private Node root;
@@ -88,6 +88,18 @@ public class BinarySearchTree {
 
     public String toString(){
         return prettyPrint();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        BinarySearchTree bst = (BinarySearchTree)o;
+        if(bst.root.value.getFreq() > root.value.getFreq()){
+            return -1;
+        }else if(bst.root.value.getFreq() == root.value.getFreq()){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 
     //
