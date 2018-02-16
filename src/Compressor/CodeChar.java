@@ -12,14 +12,16 @@ public class CodeChar {
         filler = true;
     }
 
-    public CodeChar(char c){
+    public CodeChar(char c, int freq){
         this.c = c;
-        freq = 1;
+        this.freq = freq;
         filler = false;
     }
 
-    public void increment(){
-        freq++;
+    public CodeChar(int freq){
+        c = null;
+        this.freq = freq;
+        filler = true;
     }
 
     public int getFreq(){
@@ -36,5 +38,10 @@ public class CodeChar {
 
     public boolean isFiller(){
         return filler;
+    }
+
+    @Override
+    public String toString() {
+        return c+" "+freq;
     }
 }

@@ -6,8 +6,9 @@ public class BinarySearchTree implements Comparable {
 
 
     private Node root;
-    private int size;
+    private int size, index;
     private LinkedListStack tree;
+    private CodeChar[] vals;
 
 
     public BinarySearchTree(){
@@ -24,7 +25,7 @@ public class BinarySearchTree implements Comparable {
         return root;
     }
 
-    public void insert(Compressor.CodeChar cc){
+    public void insert(CodeChar cc){
         Node parent = findParent(cc, root);
         if(cc.getFreq() <= parent.value.getFreq()){
             if(parent.left == null){
@@ -38,7 +39,24 @@ public class BinarySearchTree implements Comparable {
         size++;
     }
 
-    private Node findParent(Compressor.CodeChar cc, Node node){
+    public CodeChar[] values(){
+        vals = new CodeChar[size];
+        index = 0;
+        inOrderTraverse(root);
+        return vals;
+    }
+
+    private void inOrderTraverse(Node node) {
+        if(node == null){
+            return;
+        }
+        inOrderTraverse(node.left);
+        vals[index++] = node.value;
+        inOrderTraverse(node.right);
+
+    }
+
+    private Node findParent(CodeChar cc, Node node){
         if(cc.getFreq() <= node.value.getFreq() && node.left == null){
             return node;
         }else if(cc.getFreq() > node.value.getFreq() && node.right == null){
