@@ -50,6 +50,10 @@ public class Heap {
         return arr[getParentI(index)];
     }
 
+    public int getSize(){
+        return size;
+    }
+
     private void swap(int x, int y){
         int temp = arr[x];
         arr[x] = arr[y];
