@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class MathBucks {
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner s = new Scanner(new File("mathCosts.bat"));
+        Scanner s = new Scanner(new File("mathCosts.dat"));
 
         while(s.hasNextInt()){
             int tc = s.nextInt();
@@ -22,8 +22,9 @@ public class MathBucks {
             int cost = 0;
 
             while(heap.getSize() > 1){
-                cost += heap.pop()+heap.pop();
-                heap.insert(cost);
+                int temp = heap.pop()+heap.pop();
+                cost += temp;
+                heap.insert(temp);
             }
             System.out.println(cost);
         }
