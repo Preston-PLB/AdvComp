@@ -21,6 +21,21 @@ public class BinarySearchTree implements Comparable {
         size = 1;
     }
 
+    public BinarySearchTree(BinarySearchTree a, BinarySearchTree b){
+        root = new Node();
+        root.value = new CodeChar(a.root.value.getFreq()+b.root.value.getFreq());
+        Node small, large;
+        if(a.root.value.getFreq() < b.root.value.getFreq()){
+            small = a.root;
+            large = b.root;
+        }else{
+            small = b.root;
+            large = a.root;
+        }
+        root.left = small;
+        root.right = large;
+    }
+
     public Node root(){
         return root;
     }

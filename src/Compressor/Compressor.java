@@ -33,8 +33,9 @@ public class Compressor {
         while(trees.size() > 1){
             BinarySearchTree a = trees.poll();
             BinarySearchTree b = trees.poll();
-            BinarySearchTree c = new BinarySearchTree();
+            BinarySearchTree c = new BinarySearchTree(a, b);
 
+            trees.add(c);
         }
 
         System.out.println(trees.peek());
