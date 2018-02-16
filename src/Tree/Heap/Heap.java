@@ -70,8 +70,9 @@ public class Heap {
         }
         int out = arr[0];
         arr[0] = arr[size-1];
+        arr[size-1] = -69;
         size--;
-        heapDown();
+        minify(0);
         return out;
     }
 
@@ -93,25 +94,23 @@ public class Heap {
         return arr[0] != arr[1] && arr[0] != arr[2];
     }
 
-    private void heapDown() {
-        int i = 0;
-        while(hasLeft(i)){
-            int small = getLeftI(0);
-            if(hasRight(i) && getRight(i) < getLeft(i)){
-                small = getRightI(i);
-            }
-
-            if(arr[i] <= arr[small]){
-                break;
-            }else{
-                swap(i, small);
-            }
-            i = small;
+    private void minify(int i){
+        int l = getLeftI(i);
+        int r = getRightI(i);
+        int small = i;
+        if(l < size && arr[l] < arr[i]){
+            small = l;
+        }else if(r < size && arr[r] < arr[i]){
+            small = r;
+        }
+        if(small != i){
+            swap(i, small);
+            minify(small);
         }
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(arr);
+        return Arrays.toString(arr)+" size = "+size;
     }
 }
