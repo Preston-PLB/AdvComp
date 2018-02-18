@@ -22,5 +22,7 @@ public class Test {
                 ie.printStackTrace();
             }
         }
+
+        System.out.println(Integer.parseInt("101", 2));
     }
 }

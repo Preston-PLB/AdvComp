@@ -2,6 +2,7 @@ package Compressor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -10,20 +11,30 @@ import java.util.Scanner;
 public class Compressor {
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner s = new Scanner(new File("compressionTest.txt"));
+        BitInputStream bs = new BitInputStream(new File("compressionTest.txt"));
 
         HashMap<Character, Integer> frequencyData = new HashMap<>();
 
-        while(s.hasNext()){
-            char[] chars = s.next().toCharArray();
-            for(char c: chars) {
-                if (frequencyData.containsKey(c)) {
-                    frequencyData.put(c, frequencyData.get(c) + 1);
-                } else {
-                    frequencyData.put(c, 1);
-                }
-            }
+        int i = 0;
+        int total = 0;
+        while(true){
+           try{
+              i = bs.read();
+           } catch (IOException ioe){
+               ioe.printStackTrace();
+           }
+           if(i == -1){
+               break;
+           }
+           if(!frequencyData.containsKey((char)i)){
+               frequencyData.put((char)i, 1);
+           }else{
+               frequencyData.put((char)i, frequencyData.get((char)i)+1);
+           }
+           total++;
         }
+
+        bs.close();
 
         PriorityQueue<BinarySearchTree> trees = new PriorityQueue<>();
         for(Map.Entry<Character, Integer> pair: frequencyData.entrySet()){
@@ -38,7 +49,62 @@ public class Compressor {
             trees.add(c);
         }
 
-        System.out.println(trees.peek());
+        BitOutputStream bos = new BitOutputStream("compressed.pleb");
+        BinarySearchTree bst = trees.peek();
+        HashMap<Character, String> codes = bst.getCodes();
+        HashMap<String, Character> sedoc = new HashMap<>();
+
+        for(Map.Entry<Character, String> pair: codes.entrySet()){
+            sedoc.put(pair.getValue(), pair.getKey());
+        }
+
+        bs =  new BitInputStream(new File("compressionTest.txt"));
+        i = 0;
+        bos.writeBits(32, total);
+
+        while(true){
+            try{
+                i = bs.read();
+                if(i == -1){
+                    break;
+                }
+                String code = codes.get((char)i);
+                bos.writeBits(code.length(), Integer.parseInt(code, 2));
+            } catch (IOException ioe){
+                ioe.printStackTrace();
+            }
+
+        }
+        bos.close();
+
+        BitInputStream unc = new BitInputStream(new File("compressed.pleb"));
+        BitOutputStream un = new BitOutputStream("unCompressed.txt");
+        int x, max = 22;
+        try {
+            max = unc.readBits(32);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String str = "";
+        while(max != 0){
+            try{
+                x = unc.readBits(1);
+                if(x == -1){
+                    break;
+                }
+                str += x;
+                if(sedoc.containsKey(str)){
+                    un.write((int)sedoc.get(str));
+                    str = "";
+                    max--;
+                }
+            } catch (IOException ioe){
+                ioe.printStackTrace();
+            }
+        }
+
+        unc.close();
+        un.close();
     }
 
 }
