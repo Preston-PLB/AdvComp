@@ -2,6 +2,8 @@ package Compressor;
 
 import LinkedLists.LinkedListStack;
 
+import java.util.HashMap;
+
 public class BinarySearchTree implements Comparable {
 
 
@@ -9,6 +11,7 @@ public class BinarySearchTree implements Comparable {
     private int size, index;
     private LinkedListStack tree;
     private CodeChar[] vals;
+    private HashMap<Character, String> codes;
 
 
     public BinarySearchTree(){
@@ -59,6 +62,23 @@ public class BinarySearchTree implements Comparable {
         index = 0;
         inOrderTraverse(root);
         return vals;
+    }
+
+    public HashMap<Character, String> getCodes(){
+        codes = new HashMap<>();
+        generateCodes(root, "");
+        return codes;
+    }
+
+    private void generateCodes(Node node, String str){
+        if(node == null){
+            return;
+        }
+        generateCodes(node.left, str+"0");
+        if(!node.value.isFiller()){
+            codes.put(node.value.getChar(), str);
+        }
+        generateCodes(node.right, str+"1");
     }
 
     private void inOrderTraverse(Node node) {
