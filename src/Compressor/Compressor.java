@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Compressor {
 
     public static void main(String[] args) throws FileNotFoundException {
-        BitInputStream bs = new BitInputStream(new File("compressionTest.txt"));
+        BitInputStream bitInputStream = new BitInputStream(new File("compressionTest.txt"));
 
         HashMap<Character, Integer> frequencyData = new HashMap<>();
 
@@ -19,7 +19,7 @@ public class Compressor {
         int total = 0;
         while(true){
            try{
-              i = bs.read();
+              i = bitInputStream.read();
            } catch (IOException ioe){
                ioe.printStackTrace();
            }
@@ -34,7 +34,7 @@ public class Compressor {
            total++;
         }
 
-        bs.close();
+        bitInputStream.close();
 
         PriorityQueue<BinarySearchTree> trees = new PriorityQueue<>();
         for(Map.Entry<Character, Integer> pair: frequencyData.entrySet()){
@@ -58,13 +58,13 @@ public class Compressor {
             sedoc.put(pair.getValue(), pair.getKey());
         }
 
-        bs =  new BitInputStream(new File("compressionTest.txt"));
+        bitInputStream =  new BitInputStream(new File("compressionTest.txt"));
         i = 0;
         bos.writeBits(32, total);
 
         while(true){
             try{
-                i = bs.read();
+                i = bitInputStream.read();
                 if(i == -1){
                     break;
                 }
@@ -77,24 +77,24 @@ public class Compressor {
         }
         bos.close();
 
-        BitInputStream unc = new BitInputStream(new File("compressed.pleb"));
-        BitOutputStream un = new BitOutputStream("unCompressed.txt");
+        BitInputStream compressedInputStream = new BitInputStream(new File("compressed.pleb"));
+        BitOutputStream uncompressedOutputStream = new BitOutputStream("unCompressed.txt");
         int x, max = 22;
         try {
-            max = unc.readBits(32);
+            max = compressedInputStream.readBits(32);
         } catch (IOException e) {
             e.printStackTrace();
         }
         String str = "";
         while(max != 0){
             try{
-                x = unc.readBits(1);
+                x = compressedInputStream.readBits(1);
                 if(x == -1){
                     break;
                 }
                 str += x;
                 if(sedoc.containsKey(str)){
-                    un.write((int)sedoc.get(str));
+                    uncompressedOutputStream.write((int)sedoc.get(str));
                     str = "";
                     max--;
                 }
@@ -103,8 +103,8 @@ public class Compressor {
             }
         }
 
-        unc.close();
-        un.close();
+        compressedInputStream.close();
+        uncompressedOutputStream.close();
     }
 
 }
