@@ -59,7 +59,6 @@ public class Compressor {
         }
 
         bitInputStream =  new BitInputStream(new File("compressionTest.txt"));
-        i = 0;
         bos.writeBits(32, total);
 
         while(true){
