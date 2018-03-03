@@ -52,23 +52,4 @@ public class UnorderedGraph implements Graph {
         return vertices[vertex];
     }
 
-    public boolean connects(int src, int dest){
-        connect = false;
-        path(src, dest, 0, new boolean[size]);
-        return connect;
-    }
-
-    private void path(int src, int dest, int index, boolean[] visited){
-        if(vertices[src].get(index) == dest){
-            connect = true;
-        }else{
-            visited[src] = true;
-            if(!visited[vertices[src].get(index)]){
-                path(vertices[src].get(index), dest, 0, visited);
-            }else if(index+1 != vertices[src].size() && !visited[vertices[src].get(index+1)]){
-                path(src, dest, index+1, visited);
-            }
-        }
-    }
-
 }
