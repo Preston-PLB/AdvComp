@@ -1,6 +1,7 @@
 package PlayGround;
 
 import Compressor.BitInputStream;
+import GraphTheory.DepthFirstPaths;
 import GraphTheory.UnorderedGraph;
 import Hash.HashTableLL;
 import Hash.Name;
@@ -19,6 +20,7 @@ public class Test {
         ug.addEdge(1, 2);
         ug.addEdge(2, 3);
         ug.addEdge(4, 5);
-        System.out.println(ug.connects(0, 3, 0));
+        DepthFirstPaths dpp = new DepthFirstPaths(ug, 2);
+        System.out.println(dpp.hasPathTo(5));
     }
 }
