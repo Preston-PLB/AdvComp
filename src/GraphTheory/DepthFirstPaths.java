@@ -1,5 +1,8 @@
 package GraphTheory;
 
+import java.util.List;
+import java.util.Stack;
+
 public class DepthFirstPaths {
     private boolean[] visited;
     private int[] edgeTo;
@@ -26,6 +29,19 @@ public class DepthFirstPaths {
     public boolean hasPathTo(int vertex){
         validate(vertex);
         return visited[vertex];
+    }
+
+    public Stack<Integer> getPathTo(int vertex){
+        validate(vertex);
+        if(!visited[vertex]){
+            return null;
+        }
+        Stack<Integer> out = new Stack<>();
+        for(int i = vertex; i != src; i = edgeTo[i]){
+            out.push(i);
+        }
+        out.push(src);
+        return out;
     }
 
     private void validate(int vertex){
