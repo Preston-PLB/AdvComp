@@ -5,20 +5,11 @@ import java.util.LinkedList;
 /**
  * Created by 131111 on 3/1/2018.
  */
-public class UnorderedGraph implements Graph {
+public class UnorderedGraph extends Graph {
 
     private int size, edges;
     private LinkedList<Integer> vertices[];
     private boolean connect;
-
-    @SuppressWarnings("unchecked")
-    public UnorderedGraph(){
-        vertices = new LinkedList[10];
-
-        for(int i = 0; i<10 ;i++){
-            vertices[i] = new LinkedList<>();
-        }
-    }
 
     @SuppressWarnings("unchecked")
     public UnorderedGraph(int vertices){
@@ -44,7 +35,7 @@ public class UnorderedGraph implements Graph {
 
     @Override
     public int edges() {
-        return 0;
+        return edges;
     }
 
     @Override
