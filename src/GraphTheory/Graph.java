@@ -1,6 +1,7 @@
 package GraphTheory;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 public abstract class Graph {
 
@@ -31,6 +32,10 @@ public abstract class Graph {
 
     public boolean connected(int src, int dest){
         return false;
+    }
+
+    public Stack<Integer> getPath(int src, int dest){
+        return null;
     }
 
 }

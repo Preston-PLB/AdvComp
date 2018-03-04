@@ -1,6 +1,7 @@
 package GraphTheory;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * Created by 131111 on 3/1/2018.
@@ -47,5 +48,11 @@ public class UnorderedGraph extends Graph {
     public boolean connected(int src, int dest){
         DepthFirstPaths dfp = new DepthFirstPaths(this, src);
         return dfp.hasPathTo(dest);
+    }
+
+    @Override
+    public Stack<Integer> getPath(int src, int dest){
+        DepthFirstPaths dfp = new DepthFirstPaths(this, src);
+        return dfp.getPathTo(dest);
     }
 }
