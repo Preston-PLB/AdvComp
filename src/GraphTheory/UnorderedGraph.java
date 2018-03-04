@@ -43,4 +43,9 @@ public class UnorderedGraph extends Graph {
         return vertices[vertex];
     }
 
+    @Override
+    public boolean connected(int src, int dest){
+        DepthFirstPaths dfp = new DepthFirstPaths(this, src);
+        return dfp.hasPathTo(dest);
+    }
 }

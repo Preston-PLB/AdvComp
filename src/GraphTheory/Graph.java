@@ -29,4 +29,8 @@ public abstract class Graph {
         return vertices[vertex];
     }
 
+    public boolean connected(int src, int dest){
+        return false;
+    }
+
 }
