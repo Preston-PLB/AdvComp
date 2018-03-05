@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class ChildsPlay {
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner s = new Scanner(new File("play2.dat"));
+        Scanner s = new Scanner(new File("playJudgeCase1.dat"));
 
         int tc = s.nextInt();
 
@@ -19,10 +19,12 @@ public class ChildsPlay {
             OrderedGraph og = new OrderedGraph(max);
             boolean[] knocked = new boolean[og.vertices()];
             for(int x = 0; x<sets; x++){
-                og.addEdge(s.nextInt(), s.nextInt());
+                int t1 = s.nextInt(), t2 = s.nextInt();
+                og.addEdge(t1-1, t2-1);
             }
             for(int x = 0; x<knocks; x++){
-                knocked = knock(s.nextInt(), knocked, og);
+                int temp = s.nextInt();
+                knocked = knock(temp-1, knocked, og);
             }
             int k = 0;
             for(boolean b: knocked){
