@@ -6,6 +6,7 @@ import java.util.Stack;
 public class DepthFirstPaths {
     private boolean[] visited;
     private int[] edgeTo;
+    private boolean[] knocked;
     private final int src;
 
     public DepthFirstPaths(Graph g, int source){
@@ -26,6 +27,10 @@ public class DepthFirstPaths {
         }
     }
 
+    public boolean[] getVisited(){
+        return visited;
+    }
+
     public boolean hasPathTo(int vertex){
         validate(vertex);
         return visited[vertex];
@@ -43,6 +48,8 @@ public class DepthFirstPaths {
         out.push(src);
         return out;
     }
+
+
 
     private void validate(int vertex){
         int vertices = visited.length;
