@@ -1,6 +1,5 @@
 package GraphTheory;
 
-import java.util.LinkedList;
 import java.util.Stack;
 
 public interface Graph {

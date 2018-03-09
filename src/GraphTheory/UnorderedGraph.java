@@ -10,9 +10,7 @@ public class UnorderedGraph implements Graph {
 
     private int size, edges;
     private LinkedList<Integer> vertices[];
-    private boolean connect;
 
-    @SuppressWarnings("unchecked")
     public UnorderedGraph(int vertices){
         this.vertices = new LinkedList[vertices];
         size = vertices;

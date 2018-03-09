@@ -7,7 +7,6 @@ public class OrderedGraph implements Graph{
 
     private int size, edges;
     private LinkedList<Integer> vertices[];
-    private boolean connect;
 
     public OrderedGraph(int vertices){
         this.vertices = new LinkedList[vertices];
