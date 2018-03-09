@@ -3,7 +3,7 @@ package GraphTheory;
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class OrderedGraph extends Graph{
+public class OrderedGraph implements Graph{
 
     private int size, edges;
     private LinkedList<Integer> vertices[];

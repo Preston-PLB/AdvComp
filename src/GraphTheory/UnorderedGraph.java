@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * Created by 131111 on 3/1/2018.
  */
-public class UnorderedGraph extends Graph {
+public class UnorderedGraph implements Graph {
 
     private int size, edges;
     private LinkedList<Integer> vertices[];

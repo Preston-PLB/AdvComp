@@ -3,39 +3,16 @@ package GraphTheory;
 import java.util.LinkedList;
 import java.util.Stack;
 
-public abstract class Graph {
+public interface Graph {
 
-    private int size, edges, flip;
-    private LinkedList<Integer> vertices[];
-    private boolean connect;
+    int vertices();
 
-    public Graph(){
-        vertices = new LinkedList[10];
-        size = 0;
+    int edges();
 
-        for(int i = 0; i<10; i++){
-            this.vertices[i] = new LinkedList<>();
-        }
-    }
+    Iterable<Integer> getConnections(int vertex);
 
-    public int vertices(){
-        return size;
-    }
+    boolean connected(int src, int dest);
 
-    public int edges(){
-        return edges;
-    }
-
-    public Iterable<Integer> getConnections(int vertex) {
-        return vertices[vertex];
-    }
-
-    public boolean connected(int src, int dest){
-        return false;
-    }
-
-    public Stack<Integer> getPath(int src, int dest){
-        return null;
-    }
+    Stack<Integer> getPath(int src, int dest);
 
 }
