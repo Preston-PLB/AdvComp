@@ -17,6 +17,7 @@ public class WeightedGraph implements Graph{
 
         for(int i = 0; i<vertices ;i++){
             this.vertices[i] = new LinkedList<>();
+            this.weights[i] = new LinkedList<>();
         }
     }
 
