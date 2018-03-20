@@ -22,7 +22,7 @@ public class WeightedGraph implements Graph{
         size = vertices;
         edges = 0;
 
-        for(int i = 0; i<vertices ;i++){
+        for(int i = 0; i<vertices; i++){
             this.vertices[i] = new LinkedList<>();
             this.weights[i] = new LinkedList<>();
         }
