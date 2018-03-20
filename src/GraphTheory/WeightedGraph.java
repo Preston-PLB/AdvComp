@@ -38,8 +38,12 @@ public class WeightedGraph implements Graph{
     }
 
     @Override
-    public Iterable<Integer> getConnections(int vertex) {
+    public LinkedList<Integer> getConnections(int vertex) {
         return vertices[vertex];
+    }
+
+    public LinkedList<Integer> getWeights(int vertex) {
+        return weights[vertex];
     }
 
     @Override
