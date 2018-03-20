@@ -72,14 +72,14 @@ public class ListTester {
 //            LinkedList directorList = new LinkedList();
 //
 //            for(String x: actors){
-//                actorList.add(new Node(new Actor(x)));
+//                actorList.add(new Vertex(new Actor(x)));
 //            }
 //
 //            for(String x: directors){
-//                directorList.add(new Node(new Actor(x)));
+//                directorList.add(new Vertex(new Actor(x)));
 //            }
 //
-////            movies.add(new Node(new Movie(date, title, actorList, directorList)));
+////            movies.add(new Vertex(new Movie(date, title, actorList, directorList)));
 //    }
 //
 //        for(
@@ -103,11 +103,11 @@ public class ListTester {
 //
 //        LinkedList movies = new LinkedList();
 //
-//        movies.add(new Node(m));
-//        movies.add(new Node(n));
-//        movies.add(new Node(b));
-//        movies.add(new Node(v));
-//        movies.add(new Node(c));
+//        movies.add(new Vertex(m));
+//        movies.add(new Vertex(n));
+//        movies.add(new Vertex(b));
+//        movies.add(new Vertex(v));
+//        movies.add(new Vertex(c));
 //
 //        for(int i =0; i<movies.size(); i++){
 //            System.out.println(movies.get(i));
@@ -122,7 +122,7 @@ public class ListTester {
 
 //        Scanner s = new Scanner(new File("C:\\Users\\131111\\Downloads\\actors.txt"));
 //        while(s.hasNextLine()){
-//            all.add(new Node(new Actor(s.nextLine())));
+//            all.add(new Vertex(new Actor(s.nextLine())));
 //        }
 //        for(int i =0; i<all.size(); i++){
 //            System.out.println(all.get(i));
@@ -134,11 +134,11 @@ public class ListTester {
 
     //PART 4
 
-//        all.add(new Node(new Actor("Preston")));
-//        all.add(new Node(new Actor("Allison")));
-//        all.add(new Node(new Actor("Alejas")));
-//        all.add(new Node(new Actor("Theresa")));
-//        all.add(new Node(new Actor("John")));
+//        all.add(new Vertex(new Actor("Preston")));
+//        all.add(new Vertex(new Actor("Allison")));
+//        all.add(new Vertex(new Actor("Alejas")));
+//        all.add(new Vertex(new Actor("Theresa")));
+//        all.add(new Vertex(new Actor("John")));
 //
 //        for(int i =0; i<all.size(); i++){
 //            System.out.println(all.get(i));

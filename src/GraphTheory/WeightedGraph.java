@@ -9,6 +9,13 @@ public class WeightedGraph implements Graph{
     private LinkedList<Integer> vertices[];
     private LinkedList<Integer> weights[];
 
+    WeightedGraph(){
+        this.vertices = null;
+        this.weights = null;
+        size = 0;
+        edges = 0;
+    }
+
     public WeightedGraph(int vertices){
         this.vertices = new LinkedList[vertices];
         this.weights = new LinkedList[vertices];

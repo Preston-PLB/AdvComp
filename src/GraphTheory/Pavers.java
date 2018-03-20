@@ -20,11 +20,12 @@ public class Pavers {
             WeightedGraph map = new WeightedGraph(buildings);
 
             for(int i = 0; i<streets; i++){
-                int a = s.nextInt();
-                int b = s.nextInt();
+                int a = s.nextInt()-1;
+                int b = s.nextInt()-1;
                 int c = s.nextInt();
 
                 map.addEdge(a,b,c);
+                map.addEdge(b,a,c);
             }
 
             MinimumSpanningTree mst = new MinimumSpanningTree(map);

@@ -1,57 +1,60 @@
 package GraphTheory;
 
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 
-public class MinimumSpanningTree {
+public class MinimumSpanningTree extends WeightedGraph{
 
     private WeightedGraph base;
-    private WeightedGraph mst;
     private final int V;
 
     public MinimumSpanningTree(){
+        super();
         base = new WeightedGraph(10);
-        mst = new WeightedGraph(10);
         V = base.vertices();
     }
 
     public MinimumSpanningTree(WeightedGraph wg){
+        super(wg.vertices());
         base = wg;
-        mst = new WeightedGraph(base.vertices());
         V = base.vertices();
         createTree();
     }
 
     private void createTree(){
-        int[] c = new int[base.vertices()];
-        boolean[] e = new boolean[base.vertices()];
+        PriorityQueue<Vertex> smallest = new PriorityQueue<>();
+        Vertex[] vertices = new Vertex[V];
+        int[] parent = new int[V];
 
         for(int i = 0; i<V; i++){
-            c[i] = 0x77777777;
-            e[i] = false;
+            Vertex v = new Vertex(i, 0xfffffff);
+            smallest.add(v);
+            vertices[i] = v;
         }
 
-        c[0] = 0;
-        e[0] = false;
+        smallest.peek().weight = 0;
 
-        for(int i = 0; i<V-1; i++){
-            int u = minEdge(c, e);
-            e[i] = true;
-
-            LinkedList<Integer> weights = base.getWeights(u);
-
-            for(int x = 0; x<V; x++){
-                if(weights.get(x) != 0 && !e[x] && weights.get(x) < c[x]){
-                    c[x] = weights.get(x);
-                    mst.addEdge(x, u, weights.get(x));
-                    mst.addEdge(u, x, weights.get(x));
+        while(!smallest.isEmpty()){
+            Vertex v = smallest.poll();
+            int x = 0;
+            for(int i: base.getConnections(v.index)){
+                LinkedList<Integer> w = base.getWeights(v.index);
+                if(smallest.contains(vertices[i]) && vertices[i].weight > w.get(x)){
+                    vertices[i].weight = w.get(x);
+                    parent[i] = v.index;
+                    resetPQ(smallest);
                 }
+                x++;
             }
         }
 
+        for(int i = 0; i<V; i++){
+            this.addEdge(i, parent[i], vertices[i].weight);
+        }
     }
 
     private int minEdge(int[] c, boolean[] e){
-        int min = 0x7777777;
+        int min = 0xfffffff;
         int index = -1;
 
         for(int i = 0; i<V; i++){
@@ -63,7 +66,29 @@ public class MinimumSpanningTree {
         return index;
     }
 
+    private void resetPQ(PriorityQueue<Vertex> priorityQueue){
+        priorityQueue.add(priorityQueue.poll());
+    }
+
     public WeightedGraph getMst(){
-        return mst;
+        return this;
+    }
+
+    private class Vertex implements Comparable{
+
+        int index;
+        int weight;
+
+        public Vertex(int index, int weight){
+            this.index = index;
+            this.weight = weight;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            Vertex n = (Vertex)o;
+            return weight < n.weight ? -1 : 1;
+        }
+
     }
 }
