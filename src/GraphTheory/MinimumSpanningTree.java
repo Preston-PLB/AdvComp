@@ -53,19 +53,6 @@ public class MinimumSpanningTree extends WeightedGraph{
         }
     }
 
-    private int minEdge(int[] c, boolean[] e){
-        int min = 0xfffffff;
-        int index = -1;
-
-        for(int i = 0; i<V; i++){
-            if(c[i] < min && !e[i]){
-                min = c[i];
-                index = i;
-            }
-        }
-        return index;
-    }
-
     private void resetPQ(PriorityQueue<Vertex> priorityQueue){
         priorityQueue.add(priorityQueue.poll());
     }
