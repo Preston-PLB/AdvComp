@@ -20,8 +20,8 @@ public class LabRats {
 
             int paths = s.nextInt();
             for(int p = 0; p<paths; p++){
-                int a = s.nextInt();
-                int b = s.nextInt();
+                int a = s.nextInt()-1;
+                int b = s.nextInt()-1;
                 int weight = s.nextInt();
 
                 map.addEdge(a,b,weight);

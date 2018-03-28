@@ -47,7 +47,7 @@ public class ShortestPath {
 
             for(Integer i: connections){
                 if(vertices.contains(verts[i])){
-                    if(verts[i].weight > verts[small.index].weight+weights.get(i)){
+                    if(weights.size() > i && verts[i].weight > verts[small.index].weight+weights.get(i)){
                         verts[i].weight = verts[small.index].weight+weights.get(i);
                         resetPQ();
                     }
