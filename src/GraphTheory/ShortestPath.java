@@ -6,26 +6,20 @@ import java.util.PriorityQueue;
 
 public class ShortestPath {
 
-    private PriorityQueue<Vertex> verticies;
-    private HashSet<Vertex> visited;
+    private PriorityQueue<Vertex> vertices;
     private WeightedGraph map;
     private Vertex[] verts;
     private final int V;
-    private int src, dest;
 
-    public ShortestPath(WeightedGraph wg, int src, int dest){
+    public ShortestPath(WeightedGraph wg, int src){
         map = wg;
         V = map.vertices();
-        verticies = new PriorityQueue<>(V);
+        vertices = new PriorityQueue<>(V);
         verts = new Vertex[V];
-        visited = new HashSet<>();
-
-        this.src = src;
-        this.dest = dest;
 
         for(int i = 0; i<V; i++){
             Vertex v = new Vertex(i, 0x7fffffff);
-            verticies.add(v);
+            vertices.add(v);
             verts[i] = v;
         }
 
@@ -35,14 +29,24 @@ public class ShortestPath {
         path();
     }
 
+    public Integer[] pathWeights(){
+        Integer[] out = new Integer[V];
+
+        for(int i = 0; i<V; i++){
+            out[i] = verts[i].weight;
+        }
+
+        return out;
+    }
+
     private void path(){
-        while(!verticies.isEmpty()){
-            Vertex small = verticies.poll();
+        while(!vertices.isEmpty()){
+            Vertex small = vertices.poll();
             LinkedList<Integer> connections = map.getConnections(small.index);
             LinkedList<Integer> weights = map.getWeights(small.index);
 
             for(Integer i: connections){
-                if(verticies.contains(verts[i])){
+                if(vertices.contains(verts[i])){
                     if(verts[i].weight > verts[small.index].weight+weights.get(i)){
                         verts[i].weight = verts[small.index].weight+weights.get(i);
                         resetPQ();
@@ -53,7 +57,7 @@ public class ShortestPath {
     }
 
     private void resetPQ(){
-        verticies.add(verticies.poll());
+        vertices.add(vertices.poll());
     }
 
     private class Vertex implements Comparable{
@@ -70,11 +74,6 @@ public class ShortestPath {
         public int compareTo(Object o) {
             Vertex n = (Vertex)o;
             return weight < n.weight ? -1 : 1;
-        }
-
-        @Override
-        public int hashCode(){
-            return index*weight;
         }
 
     }
