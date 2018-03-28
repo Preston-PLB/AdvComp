@@ -27,7 +27,7 @@ public class MinimumSpanningTree extends WeightedGraph{
         int[] parent = new int[V];
 
         for(int i = 0; i<V; i++){
-            Vertex v = new Vertex(i, 0xfffffff);
+            Vertex v = new Vertex(i, 0x7fffffff);
             smallest.add(v);
             vertices[i] = v;
         }
