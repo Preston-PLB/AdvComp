@@ -45,13 +45,15 @@ public class ShortestPath {
             LinkedList<Integer> connections = map.getConnections(small.index);
             LinkedList<Integer> weights = map.getWeights(small.index);
 
+            int index = 0;
             for(Integer i: connections){
                 if(vertices.contains(verts[i])){
-                    if(weights.size() > i && verts[i].weight > verts[small.index].weight+weights.get(i)){
-                        verts[i].weight = verts[small.index].weight+weights.get(i);
+                    if(verts[i].weight > verts[small.index].weight+weights.get(index)){
+                        verts[i].weight = verts[small.index].weight+weights.get(index);
                         resetPQ();
                     }
                 }
+                index++;
             }
         }
     }
