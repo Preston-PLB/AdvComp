@@ -1,3 +1,5 @@
+package Shapes;
+
 import java.awt.*;
 
 /**
@@ -26,7 +28,7 @@ public class Triangle
         xPosition = 50;
         yPosition = 15;
         color = "green";
-        isVisible = false;
+        isVisible = true;
     }
 
     /**
@@ -181,6 +183,16 @@ public class Triangle
             canvas.wait(10);
         }
     }
+
+    public void draw(int[] x, int[] y, int index)
+    {
+        if(isVisible) {
+            Canvas canvas = Canvas.getCanvas();
+            canvas.draw(this, index % 2 == 0 ? "green":"white", new Polygon(x, y, 3));
+            canvas.wait(10);
+        }
+    }
+
 
     /**
      * Erase the triangle on screen.
