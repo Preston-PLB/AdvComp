@@ -3,10 +3,11 @@ package Shapes;
 public class Main {
 
     public static void main(String[] args){
-        int[] x = {0,150,300};
-        int[] y = {300,0,300};
+        int[] x = {0,500,1000};
+        int[] y = {1000,0,1000};
 
-        serpin(x,y,6);
+        serpin(x,y,8
+        );
     }
 
     public static void serpin(int[] x, int[] y, int depth){

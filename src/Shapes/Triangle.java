@@ -189,7 +189,7 @@ public class Triangle
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas();
             canvas.draw(this, index % 2 == 0 ? "green":"white", new Polygon(x, y, 3));
-            canvas.wait(10);
+            //canvas.wait(10);
         }
     }
 
