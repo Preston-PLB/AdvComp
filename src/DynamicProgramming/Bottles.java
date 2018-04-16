@@ -27,7 +27,7 @@ public class Bottles {
     private static int maxVol(int[] vol) {
         int[] dp = new int[vol.length];
         Arrays.fill(dp, -1);
-        return loop(vol, dp, vol.length-1);
+        return othetrLoop(vol,dp);
     }
 
     private static int loop(int[] vol, int[] dp, int i) {
@@ -43,6 +43,15 @@ public class Bottles {
             }
             return dp[i];
         }
+    }
+
+    private static int othetrLoop(int[] vol, int[] dp){
+        dp[0] = vol[0];
+        dp[1] = Math.max(vol[0], vol[1]);
+        for(int i = 2; i<vol.length; i++){
+            dp[i] = Math.max(dp[i-2]+vol[i], dp[i-1]);
+        }
+        return dp[dp.length-1];
     }
 
 }
