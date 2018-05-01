@@ -32,8 +32,8 @@ public class CasinoRoyal {
         for(int[] i: dp){
             Arrays.fill(i, -1);
         }
-        //return recursive(pt, 0,0, dp);
-        return dynamic(pt, dp);
+        return recursive(pt, 0,0, dp);
+        //return dynamic(pt, dp);
     }
 
     private static int recursive(PachinkoTree pt, int row, int index, int[][] dp){
@@ -43,7 +43,7 @@ public class CasinoRoyal {
         }else{
             if(dp[row][index] == -1){
                 int val = pt.getValue(row, index);
-                dp[row][index] = Math.max(recursive(pt, row+1, index, dp)+val, recursive(pt, row+1, index+1, dp)+val);
+                dp[row][index] = Math.max(recursive(pt, row+1, index, dp), recursive(pt, row+1, index+1, dp))+val;
             }
             return dp[row][index];
         }
@@ -56,7 +56,7 @@ public class CasinoRoyal {
         for(int y = dp.length-2; y > -1; y--){
             for(int x = 0; x < y+1; x++){
                 int val = pt.getValue(y, x);
-                dp[y][x] = Math.max(dp[y+1][x]+ val, dp[y+1][x+1]+val);
+                dp[y][x] = Math.max(dp[y+1][x], dp[y+1][x+1])+val;
             }
         }
         return dp[0][0];
