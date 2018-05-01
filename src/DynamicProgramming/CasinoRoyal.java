@@ -1,5 +1,7 @@
 package DynamicProgramming;
 
+import sun.security.krb5.internal.PAData;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -32,7 +34,8 @@ public class CasinoRoyal {
         for(int[] i: dp){
             Arrays.fill(i, -1);
         }
-        return recursive(pt, 0,0, dp);
+        //return recursive(pt, 0,0, dp);
+        return dynamic(pt, dp);
     }
 
     private static int recursive(PachinkoTree pt, int row, int index, int[][] dp){
@@ -46,8 +49,19 @@ public class CasinoRoyal {
             }
             return dp[row][index];
         }
+    }
 
-
+    private static int dynamic(PachinkoTree pt, int[][] dp){
+        for(int i = 0; i<dp.length; i++){
+            dp[dp.length-1][i] = pt.getValue(dp.length-1, i);
+        }
+        for(int y = dp.length-2; y > -1; y--){
+            for(int x = 0; x < y+1; x++){
+                int val = pt.getValue(y, x);
+                dp[y][x] = Math.max(dp[y+1][x]+ val, dp[y+1][x+1]+val);
+            }
+        }
+        return dp[0][0];
     }
 
 }
