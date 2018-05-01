@@ -2,6 +2,7 @@ package DynamicProgramming;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CasinoRoyal {
@@ -22,31 +23,36 @@ public class CasinoRoyal {
 
 class PachinkoTree{
 
-    Node root;
+    int[][] tree;
 
-    public PachinkoTree(String value){
-        insert(value, root);
-    }
+    public PachinkoTree(int depth){
+        tree = new int[depth][depth];
 
-    public void insert(String value, Node n){
-        if(n == null) {
-            n = new Node(value);
-        }else{
-            insert(value, n.left);
-            insert(value, n.right);
+        for(int i = 0; i<tree.length; i++){
+            Arrays.fill(tree[i], -1);
         }
     }
 
-
-
-    private class Node{
-        int value;
-        Node left, right;
-
-        public Node(String value){
-            this.value = Integer.parseInt(value);
+    public void insert(int value){
+        int k = 1;
+        outer:
+        for(int y = 0; y<tree.length; y++){
+            for(int x = 0; x<k; x++){
+                if(tree[y][x] == -1){
+                    tree[y][x] = value;
+                    break outer;
+                }
+            }
+            k++;
         }
+    }
 
+    public int getLeftChild(int row, int index){
+        return tree[row+1][index];
+    }
+
+    public int getRightChild(int row, int index){
+        return tree[row+1][index+1];
     }
 
 }
