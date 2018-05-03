@@ -43,17 +43,8 @@ public class Truck {
                 }else{
                     dp[y][x] = Math.max(dp[y][x-weights[y-1]+1]+value[y-1], dp[y-1][x]);
                 }
-                printArray(dp);
             }
         }
         return dp[dp.length-1][dp[0].length-1];
     }
-
-    private static void printArray(int[][] array){
-        for(int[] a: array){
-            System.out.println(Arrays.toString(a));
-        }
-        System.out.println();
-    }
-
 }
