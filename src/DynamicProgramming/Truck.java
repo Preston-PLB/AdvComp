@@ -31,7 +31,6 @@ public class Truck {
         for(int[] array: dp){
             Arrays.fill(array, 0);
         }
-        Arrays.fill(dp[0], 0);
         return dynamic(dp, space, cost);
     }
 
@@ -47,7 +46,6 @@ public class Truck {
                     dp[y][x] = Math.max(choice1, choice2);
                 }
             }
-            printArray(dp);
         }
         return dp[dp.length-1][dp[0].length-1];
     }
