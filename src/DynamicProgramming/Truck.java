@@ -29,9 +29,12 @@ public class Truck {
     private static int getMax(int cap, int pairs, int[] space, int[] cost) {
         int[][] dp = new int[pairs+1][cap+1];
         for(int[] array: dp){
-            Arrays.fill(array, 0);
+            Arrays.fill(array, -1);
+            array[0] = 0;
         }
-        return dynamic(dp, space, cost);
+        Arrays.fill(dp[0], 0);
+
+        return recursive(dp, space, cost, dp[0].length-1, dp.length-1);
     }
 
     private static int dynamic(int[][] dp, int[] weights, int[] value){
@@ -48,6 +51,20 @@ public class Truck {
             }
         }
         return dp[dp.length-1][dp[0].length-1];
+    }
+
+    private static int recursive(int[][] dp, int[] weights, int[] value, int i, int w){
+        if(w < 1){
+            return 0;
+        }
+        if(dp[w][i] == -1){
+            if(i < weights[w-1]){
+                dp[w][i] = Math.max(0, recursive(dp, weights, value, i, w-1));
+            }else{
+                dp[w][i] = Math.max(recursive(dp, weights, value, i-weights[w-1], w)+value[w-1], recursive(dp, weights, value, i, w-1));
+            }
+        }
+        return dp[w][i];
     }
 
     private static void printArray(int[][] array){
