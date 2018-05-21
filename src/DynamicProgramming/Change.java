@@ -54,8 +54,11 @@ public class Change {
         return dp[dp.length-1][dp[0].length-1];
     }
 
-
-
+    static int[] trace(int y, int x, int[] coins, int[][] dp){
+        if(y == 1 && dp[y][x] != 0){
+            coins[y] =
+        }
+    }
 
     static void printarray(int[][] arr){
         for(int[] a: arr){
