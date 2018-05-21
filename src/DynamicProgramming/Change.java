@@ -56,7 +56,12 @@ public class Change {
 
     static int[] trace(int y, int x, int[] coins, int[][] dp){
         if(y == 1 && dp[y][x] != 0){
-            coins[y] =
+            coins[y] += 1;
+        }else if(dp[y-1][x] == dp[y][x]){
+            trace(y-1, x, coins, dp);
+        }else{
+            coins[y] += 1;
+            trace(y, x-coins[y-1], coins, dp);
         }
     }
 
